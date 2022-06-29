@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Hooks {
     private final SharedDictionary sharedDictionary;
-    WebDriver driver;
+    private WebDriver driver;
 
     public Hooks (SharedDictionary sharedDictionary){
         this.sharedDictionary = sharedDictionary;
