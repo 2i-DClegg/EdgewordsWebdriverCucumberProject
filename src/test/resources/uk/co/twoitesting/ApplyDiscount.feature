@@ -1,19 +1,18 @@
 Feature: E-Commerce Site
+
   Background:
     Given I have logged in with username "TBD" and password "TBD"
-    And I have navigated to the shop page
-    And I add a clothing item to the cart
-    And I navigate to the cart
+    Given I have an item in the cart
 
   Scenario: Add Item to cart and apply login
-    Given I have an item in the cart
+
     When I apply the discount code "edgewords"
     Then The 15% discount should be applied to the product, and the price should be adjusted for shipping.
 
   Scenario: Complete an order and confirm it in order history
-    Given I have gone to check out
-    When I fill in my billing details/address And I place the order
+    When I place the order #with the following details
+    #inline table
+      | FirstName | LastName | HouseNumberStreetName  | Town   | Postcode | Phone       | Email                     |
+      | John      | Smith    | Wimbledon Cricket Club | London | SW19 5AG | 01234567891 | TestingUser@TestEmail.com |
     Then I should be taken to a completed order screen which has the order number
-    When I navigate to my account and go to the orders section
-    Then I can see this order with the same order number.
-
+    Then I can see this order in my account with the same order number.
