@@ -5,8 +5,18 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import org.junit.jupiter.api.Assertions.*;
+import org.openqa.selenium.WebDriver;
+import uk.co.twoitesting.utilities.SharedDictionary;
 
 public class StepDefinitions {
+
+    private final SharedDictionary sharedDictionary;
+    private WebDriver driver;
+
+    public StepDefinitions(SharedDictionary sharedDictionary){
+        this.sharedDictionary = sharedDictionary;
+        this.driver = (WebDriver) sharedDictionary.getValue("driver");
+    }
 
     @Given("I have logged in with username {string} and password {string}")
     public void i_have_logged_in_with_username_and_password(String string, String string2) {
