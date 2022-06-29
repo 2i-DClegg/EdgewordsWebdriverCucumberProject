@@ -13,7 +13,7 @@ public class HomePagePOM {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(linkText = "Dimiss")
+    @FindBy(linkText = "Dismiss")
     WebElement dismissBtn;
 
     @FindBy(linkText = "My account")
