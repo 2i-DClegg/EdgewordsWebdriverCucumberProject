@@ -4,10 +4,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import io.cucumber.java.sl.In;
 import org.junit.jupiter.api.Assertions.*;
 import org.openqa.selenium.WebDriver;
 import uk.co.twoitesting.POMPages.HomePagePOM;
 import uk.co.twoitesting.POMPages.LoginPagePOM;
+import uk.co.twoitesting.POMPages.MyAccountPOM;
 import uk.co.twoitesting.utilities.SharedDictionary;
 
 public class StepDefinitions {
@@ -34,9 +36,11 @@ public class StepDefinitions {
     }
 
     @Given("I have an item in the cart")
-    public void i_have_an_item_in_the_cart() {
+    public void i_have_an_item_in_the_cart() throws InterruptedException {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        MyAccountPOM myAccountPage = new MyAccountPOM(driver);
+        myAccountPage.goToShop();
+        Thread.sleep(2000);
     }
 
     //Scenario1
