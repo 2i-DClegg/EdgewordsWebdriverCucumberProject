@@ -1,7 +1,7 @@
 Feature: E-Commerce Site
 
   Background:
-    Given I have logged in with username "TBD" and password "TBD"
+    Given I have logged in with username "TestingUser@TestEmail.com" and password "TestPassword123!"
     Given I have an item in the cart
 
   Scenario: Add Item to cart and apply login
