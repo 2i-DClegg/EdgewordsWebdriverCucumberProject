@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions.*;
 import org.openqa.selenium.WebDriver;
 import uk.co.twoitesting.POMPages.HomePagePOM;
+import uk.co.twoitesting.POMPages.LoginPagePOM;
 import uk.co.twoitesting.utilities.SharedDictionary;
 
 public class StepDefinitions {
@@ -20,13 +21,18 @@ public class StepDefinitions {
     }
 
     @Given("I have logged in with username {string} and password {string}")
-    public void i_have_logged_in_with_username_and_password(String string, String string2) throws InterruptedException {
+    public void i_have_logged_in_with_username_and_password(String username, String password) throws InterruptedException {
         // Write code here that turns the phrase above into concrete actions
         driver.get("https://www.edgewordstraining.co.uk/demo-site/");
         HomePagePOM homepage = new HomePagePOM(driver);
         homepage.goToLogin();
         Thread.sleep(2000);
+
+        LoginPagePOM loginPage = new LoginPagePOM(driver);
+        loginPage.enterLogin(username, password);
+        Thread.sleep(2000);
     }
+
     @Given("I have an item in the cart")
     public void i_have_an_item_in_the_cart() {
         // Write code here that turns the phrase above into concrete actions
