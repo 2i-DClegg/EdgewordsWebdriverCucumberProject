@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import uk.co.twoitesting.POMPages.HomePagePOM;
 import uk.co.twoitesting.POMPages.LoginPagePOM;
 import uk.co.twoitesting.POMPages.MyAccountPOM;
+import uk.co.twoitesting.POMPages.ProductPagePOM;
 import uk.co.twoitesting.utilities.SharedDictionary;
 
 public class StepDefinitions {
@@ -35,8 +36,11 @@ public class StepDefinitions {
 
     @Given("I have an {string} in the cart")
     public void i_have_an_in_the_cart(String product) {
-        MyAccountPOM accountPage = new MyAccountPOM(driver, product);
-        accountPage.searchProduct(product);;
+        MyAccountPOM accountPage = new MyAccountPOM(driver);
+        accountPage.searchProduct(product);
+
+        ProductPagePOM productPage = new ProductPagePOM(driver);
+        productPage.addToCart();
 
     }
     //Scenario1
