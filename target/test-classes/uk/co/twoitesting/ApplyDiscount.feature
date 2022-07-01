@@ -2,7 +2,7 @@ Feature: E-Commerce Site
 
   Background:
     Given I have logged in with username "TestingUser@TestEmail.com" and password "TestPassword123!"
-    Given I have an item in the cart
+    Given I have an "Cap" in the cart
 
   Scenario: Add Item to cart and apply login
 
