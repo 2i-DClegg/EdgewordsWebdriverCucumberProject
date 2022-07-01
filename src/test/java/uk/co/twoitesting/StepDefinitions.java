@@ -4,8 +4,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import io.cucumber.java.sl.In;
-import org.junit.jupiter.api.Assertions.*;
 import org.openqa.selenium.WebDriver;
 import uk.co.twoitesting.POMPages.HomePagePOM;
 import uk.co.twoitesting.POMPages.LoginPagePOM;
@@ -35,14 +33,12 @@ public class StepDefinitions {
         Thread.sleep(2000);
     }
 
-    @Given("I have an item in the cart")
-    public void i_have_an_item_in_the_cart() throws InterruptedException {
-        // Write code here that turns the phrase above into concrete actions
-        MyAccountPOM myAccountPage = new MyAccountPOM(driver);
-        myAccountPage.goToShop();
-        Thread.sleep(2000);
-    }
+    @Given("I have an {string} in the cart")
+    public void i_have_an_in_the_cart(String product) {
+        MyAccountPOM accountPage = new MyAccountPOM(driver, product);
+        accountPage.searchProduct(product);;
 
+    }
     //Scenario1
     @When("I apply the discount code {string}")
     public void i_apply_the_discount_code(String string) {
