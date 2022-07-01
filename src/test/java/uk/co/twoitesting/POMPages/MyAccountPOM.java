@@ -10,7 +10,7 @@ import uk.co.twoitesting.utilities.SharedDictionary;
 public class MyAccountPOM {
     WebDriver driver;
 
-    public MyAccountPOM(WebDriver driver, String product) {
+    public MyAccountPOM(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
