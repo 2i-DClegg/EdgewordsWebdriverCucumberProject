@@ -18,8 +18,11 @@ public class ProductPagePOM {
     @FindBy(name = "add-to-cart")
     WebElement cartBtn;
 
+    @FindBy(linkText = "View cart")
+    WebElement viewCartBtn;
+
     public void addToCart(){
         cartBtn.click();
-
+        viewCartBtn.click();
     }
 }
