@@ -35,6 +35,9 @@ public class CartPagePOM {
     @FindBy(css="[data-title=Total] > Strong > span.woocommerce-Price-amount  ")
     WebElement totalCost;
 
+    @FindBy(linkText = "Proceed to checkout")
+    WebElement checkoutLink;
+
 
     public void applyCoupon(String couponCode){
         couponInput.sendKeys(couponCode);
@@ -64,6 +67,11 @@ public class CartPagePOM {
 
     public double getCurrentTotal(){
         return priceToNum(totalCost.getText());
+    }
+
+    public void goToCheckout() {
+        checkoutLink.click();
+
     }
 
 
