@@ -4,12 +4,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.openqa.selenium.WebDriver;
-import uk.co.twoitesting.POMPages.HomePagePOM;
-import uk.co.twoitesting.POMPages.LoginPagePOM;
-import uk.co.twoitesting.POMPages.MyAccountPOM;
-import uk.co.twoitesting.POMPages.ProductPagePOM;
+import uk.co.twoitesting.POMPages.*;
 import uk.co.twoitesting.utilities.SharedDictionary;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class StepDefinitions {
 
@@ -45,14 +47,15 @@ public class StepDefinitions {
     }
     //Scenario1
     @When("I apply the discount code {string}")
-    public void i_apply_the_discount_code(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void i_apply_the_discount_code(String discountCode) {
+        CartPagePOM cartPage = new CartPagePOM(driver);
+        cartPage.applyCoupon(discountCode);
+
     }
     @Then("The {int}% discount should be applied to the product, and the price should be adjusted for shipping.")
-    public void the_discount_should_be_applied_to_the_product_and_the_price_should_be_adjusted_for_shipping(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_discount_should_be_applied_to_the_product_and_the_price_should_be_adjusted_for_shipping(Integer discount) {
+        CartPagePOM cartPage = new CartPagePOM(driver);
+        MatcherAssert.assertThat(cartPage.manualDiscountCalcAndStore(discount), equalTo(cartPage.getCurrentTotal()));
     }
 
     //Scenario2
