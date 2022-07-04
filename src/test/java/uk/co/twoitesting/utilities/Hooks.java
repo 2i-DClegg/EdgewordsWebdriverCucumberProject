@@ -52,6 +52,10 @@ public class Hooks {
 
         }
 
+        //Log Out
+        sharedDriver.findElement(By.linkText("My account")).click();
+        sharedDriver.findElement(By.linkText("Logout"));
+
         sharedDriver.quit();
     }
 }
