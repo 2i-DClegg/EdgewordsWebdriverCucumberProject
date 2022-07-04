@@ -55,7 +55,7 @@ public class StepDefinitions {
     @Then("The {int}% discount should be applied to the product, and the price should be adjusted for shipping.")
     public void the_discount_should_be_applied_to_the_product_and_the_price_should_be_adjusted_for_shipping(Integer discount) {
         CartPagePOM cartPage = new CartPagePOM(driver);
-        MatcherAssert.assertThat(cartPage.manualDiscountCalcAndStore(discount), equalTo(cartPage.getCurrentTotal()));
+        MatcherAssert.assertThat(cartPage.getCurrentTotal(), equalTo(cartPage.manualDiscountCalcAndStore(discount)));
     }
 
     //Scenario2
