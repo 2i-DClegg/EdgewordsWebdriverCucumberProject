@@ -45,6 +45,8 @@ public class StepDefinitions {
         MyAccountPOM accountPage = new MyAccountPOM(driver);
         accountPage.searchProduct(product);
 
+        waitForElementToBeClickable(driver,By.name("add-to-cart"),5);
+
         ProductPagePOM productPage = new ProductPagePOM(driver);
         productPage.addToCart();
 
@@ -52,6 +54,7 @@ public class StepDefinitions {
     //Scenario1
     @When("I apply the discount code {string}")
     public void i_apply_the_discount_code(String discountCode) {
+        waitForElementToBeClickable(driver, By.name("apply_coupon"), 5);
         CartPagePOM cartPage = new CartPagePOM(driver);
         cartPage.applyCoupon(discountCode);
 
@@ -63,23 +66,27 @@ public class StepDefinitions {
     }
 
     //Scenario2
-    @When("I place the order #with the following details")
+    @When("I place the order with the following details")
     public void i_place_the_order_with_the_following_details(io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
-        // Write code here that turns the phrase above into concrete actions
-        //TUrn table into a map
-        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+
         CartPagePOM cartPage = new CartPagePOM(driver);
         cartPage.goToCheckout();
+        waitForElementToBeClickable(driver, By.name("billing_first_name"), 5);
 
         CheckoutPagePOM checkoutPage = new CheckoutPagePOM(driver);
+
+        //Turn table into a map
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         checkoutPage.fillInBillingForm(data);
+
+        //Have to keep this as can't work out how to await transition on page
         Thread.sleep(3000);
         checkoutPage.completeOrder();
-        Thread.sleep(3000);
-
     }
     @Then("I should be taken to a completed order screen which has the order number")
     public void i_should_be_taken_to_a_completed_order_screen_which_has_the_order_number() {
+
+        waitForElementToBeClickable(driver, By.cssSelector(".woocommerce-thankyou-order-received"), 5);
         OrderReceivedPagePOM orderReceivedPage = new OrderReceivedPagePOM(driver, sharedDictionary);
         String orderNumber = orderReceivedPage.storeOrderNumber();
         String orderText = orderReceivedPage.orderConfirmation();
@@ -90,10 +97,13 @@ public class StepDefinitions {
     }
     @Then("I can see this order in my account with the same order number.")
     public void i_can_see_this_order_in_my_account_with_the_same_order_number() {
-        // Write code here that turns the phrase above into concrete actions
+        //check we have landed
+        waitForElementToBeClickable(driver, By.linkText("Logout"), 5);
         MyAccountPOM accountPage = new MyAccountPOM(driver);
         accountPage.goToOrders();
 
+
+        waitForElementToBeClickable(driver, By.cssSelector(".woocommerce-orders-table"), 5);
         String storedOrderNum = (String) sharedDictionary.getValue("orderNumber");
         //check that the order number exists by checking the number of elements returned is more than 0
         int numberOfElements = driver.findElements(By.partialLinkText(storedOrderNum)).size();
