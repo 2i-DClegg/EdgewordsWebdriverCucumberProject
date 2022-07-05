@@ -18,8 +18,15 @@ public class MyAccountPOM {
     @FindBy(id = "woocommerce-product-search-field-0")
     WebElement searchBox;
 
+    @FindBy(linkText = "Orders")
+    WebElement ordersLink;
+
     public void searchProduct(String product){
         searchBox.sendKeys(product + Keys.ENTER);
+    }
+
+    public void goToOrders(){
+        ordersLink.click();
     }
 
 }
