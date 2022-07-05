@@ -77,12 +77,19 @@ public class StepDefinitions {
     }
     @Then("I should be taken to a completed order screen which has the order number")
     public void i_should_be_taken_to_a_completed_order_screen_which_has_the_order_number() {
-
+        OrderReceivedPagePOM orderReceivedPage = new OrderReceivedPagePOM(driver, sharedDictionary);
+        orderReceivedPage.storeOrderNumber();
+        orderReceivedPage.goToAccount();
     }
     @Then("I can see this order in my account with the same order number.")
     public void i_can_see_this_order_in_my_account_with_the_same_order_number() {
         // Write code here that turns the phrase above into concrete actions
+        MyAccountPOM accountPage = new MyAccountPOM(driver);
+        accountPage.goToOrders();
+
         throw new io.cucumber.java.PendingException();
+
+
     }
 
 }
