@@ -13,6 +13,8 @@ import uk.co.twoitesting.POMPages.CartPagePOM;
 
 import java.util.List;
 
+import static uk.co.twoitesting.utilities.UtilityFuncs.waitForElementToBeClickable;
+
 public class Hooks {
     private final SharedDictionary sharedDictionary;
     private WebDriver driver;
@@ -35,6 +37,7 @@ public class Hooks {
 
 
         sharedDriver.findElement(By.linkText("Cart")).click();
+
         //clear discount code
         try{
             sharedDriver.findElement(By.linkText("[Remove]")).click();
@@ -53,7 +56,10 @@ public class Hooks {
         }
 
         //Log Out
+
         sharedDriver.findElement(By.linkText("My account")).click();
+
+        waitForElementToBeClickable(driver, By.linkText("Logout"), 5);
         sharedDriver.findElement(By.linkText("Logout"));
 
         sharedDriver.quit();
