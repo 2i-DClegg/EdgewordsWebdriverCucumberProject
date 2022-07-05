@@ -1,9 +1,15 @@
 package uk.co.twoitesting.POMPages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
+import java.util.Map;
+
+import static uk.co.twoitesting.utilities.UtilityFuncs.waitForElementToBeClickable;
 
 public class CheckoutPagePOM {
     WebDriver driver;
@@ -37,13 +43,47 @@ public class CheckoutPagePOM {
     @FindBy(id = "billing_email")
     WebElement emailInput;
 
-    @FindBy(id = "payment_method_cheque")
-    WebElement chequePayment;
+    @FindBy(css = ".wc_payment_method payment_method_cheque")
+    WebElement chequePaymentBtn;
 
-    @FindBy(id="place_order")
-    WebElement placeOrderButton;
+    public void fillInBillingForm(List<Map<String, String>> tableData) {
+        String fName = tableData.get(0).get("FirstName");
+        String lName = tableData.get(0).get("LastName");
+        String houseNumStreetName = tableData.get(0).get("HouseNumberStreetName");
+        String town = tableData.get(0).get("Town");
+        String postcode = tableData.get(0).get("Postcode");
+        String email = tableData.get(0).get("Email");
+        String phone = tableData.get(0).get("Phone");
 
-    public void fillInBillingFrom() {
+        //Clear any persistent input
+        firstNameInput.clear();
+        lastNameInput.clear();
+        addressFirstLineInput.clear();
+        townCityInput.clear();
+        postcodeInput.clear();
+        emailInput.clear();
+        phoneInput.clear();
+
+        firstNameInput.sendKeys(fName);
+        lastNameInput.sendKeys(lName);
+        addressFirstLineInput.sendKeys(houseNumStreetName);
+        townCityInput.sendKeys(town);
+        postcodeInput.sendKeys(postcode);
+        emailInput.sendKeys(email);
+        phoneInput.sendKeys(phone);
+
+//        waitForElementToBeClickable(driver, By.cssSelector(".wc_payment_method payment_method_cheque"), 3 );
+//        chequePaymentBtn.click();
+    }
+
+    public void completeOrder(){
+        //if we declare earlier we get a stale element exception
+
+        WebElement placeOrderBtn = driver.findElement(By.id("place_order"));
+        //placeOrderBtn.click();
+        System.out.println("Have we hit an error?");
+        System.out.println(placeOrderBtn);
 
     }
+
 }

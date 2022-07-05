@@ -10,6 +10,9 @@ import org.openqa.selenium.WebDriver;
 import uk.co.twoitesting.POMPages.*;
 import uk.co.twoitesting.utilities.SharedDictionary;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -60,21 +63,20 @@ public class StepDefinitions {
 
     //Scenario2
     @When("I place the order #with the following details")
-    public void i_place_the_order_with_the_following_details(io.cucumber.datatable.DataTable dataTable) {
+    public void i_place_the_order_with_the_following_details(io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
         // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
-    }
-    @Then("I should be taken to a completed order screen which has the order number")
-    public void i_should_be_taken_to_a_completed_order_screen_which_has_the_order_number() {
+        //TUrn table into a map
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         CartPagePOM cartPage = new CartPagePOM(driver);
         cartPage.goToCheckout();
 
+        CheckoutPagePOM checkoutPage = new CheckoutPagePOM(driver);
+        checkoutPage.fillInBillingForm(data);
+        checkoutPage.completeOrder();
+
+    }
+    @Then("I should be taken to a completed order screen which has the order number")
+    public void i_should_be_taken_to_a_completed_order_screen_which_has_the_order_number() {
 
     }
     @Then("I can see this order in my account with the same order number.")
