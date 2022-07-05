@@ -78,12 +78,8 @@ public class CheckoutPagePOM {
 
     public void completeOrder(){
         //if we declare earlier we get a stale element exception
-
         WebElement placeOrderBtn = driver.findElement(By.id("place_order"));
-        //placeOrderBtn.click();
-        System.out.println("Have we hit an error?");
-        System.out.println(placeOrderBtn);
-
-    }
+        placeOrderBtn.click();
+       }
 
 }

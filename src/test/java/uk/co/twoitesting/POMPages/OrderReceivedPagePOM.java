@@ -22,12 +22,20 @@ public class OrderReceivedPagePOM {
     @FindBy(linkText = "My account")
     WebElement myAccountLink;
 
-    public void storeOrderNumber(){
+    @FindBy(css = ".woocommerce-thankyou-order-received")
+    WebElement orderConfirmation;
+
+    public String storeOrderNumber(){
         String orderNumber = orderNumberElement.getText();
         sharedDictionary.addValue("orderNumber", orderNumber);
+        return orderNumber;
     }
 
     public void goToAccount(){
         myAccountLink.click();
+    }
+
+    public String orderConfirmation() {
+        return orderConfirmation.getText();
     }
 }
