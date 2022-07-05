@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.Map;
 
-import static uk.co.twoitesting.utilities.UtilityFuncs.waitForElementToBeClickable;
 
 public class CheckoutPagePOM {
     WebDriver driver;
@@ -72,8 +71,6 @@ public class CheckoutPagePOM {
         emailInput.sendKeys(email);
         phoneInput.sendKeys(phone);
 
-//        waitForElementToBeClickable(driver, By.cssSelector(".wc_payment_method payment_method_cheque"), 3 );
-//        chequePaymentBtn.click();
     }
 
     public void completeOrder(){
