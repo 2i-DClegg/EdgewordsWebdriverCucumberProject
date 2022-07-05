@@ -13,6 +13,7 @@ import java.util.Map;
 
 
 import static org.hamcrest.Matchers.*;
+import static uk.co.twoitesting.utilities.UtilityFuncs.waitForElementToBeClickable;
 
 public class StepDefinitions {
 
@@ -30,11 +31,13 @@ public class StepDefinitions {
         driver.get("https://www.edgewordstraining.co.uk/demo-site/");
         HomePagePOM homepage = new HomePagePOM(driver);
         homepage.goToLogin();
-        Thread.sleep(2000);
+
+        waitForElementToBeClickable(driver, By.name("login"), 5);
 
         LoginPagePOM loginPage = new LoginPagePOM(driver);
         loginPage.enterLogin(username, password);
-        Thread.sleep(2000);
+
+        waitForElementToBeClickable(driver, By.linkText("Logout"), 5);
     }
 
     @Given("I have an {string} in the cart")
